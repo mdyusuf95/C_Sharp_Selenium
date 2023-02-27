@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+	
+	
+	<TestRunParameters>
+		<Parameter name="Url" value="http://rmgyantra:rmgy@9999@localhost:8084/" />
+		<Parameter name="Browser" value="Chrome" />
+
+		<Parameter name="username" value="rmgyantra" />
+		<Parameter name="password" value="rmgy@9999" />
+
+		<Parameter name="myname" value="rama" />
+		
+		
+	
+	</TestRunParameters>
+
+	<!-- Configuration for loggers -->
+	<LoggerRunSettings>
+		<Loggers>
+			<Logger friendlyName="console" enabled="True">
+				<Configuration>
+					<Verbosity>quiet</Verbosity>
+				</Configuration>
+			</Logger>
+			<Logger friendlyName="trx" enabled="True">
+				<Configuration>
+					<LogFileName>foo.trx</LogFileName>
+				</Configuration>
+			</Logger>
+			<Logger friendlyName="html" enabled="True">
+				<Configuration>
+					<LogFileName>foo.html</LogFileName>
+				</Configuration>
+			</Logger>
+			<Logger friendlyName="blame" enabled="True" />
+		</Loggers>
+	</LoggerRunSettings>
+	
+</RunSettings>
