@@ -43,7 +43,10 @@ namespace C_Sharp_Selenium.Main.Genric
         public static void ClassInitialize(TestContext context )
         {
             ChromeOptions options = new ChromeOptions();
+
+            
            // options.AddArguments("headless");
+           
 
             Console.WriteLine("Open browser ");
             _testcontext = context;
