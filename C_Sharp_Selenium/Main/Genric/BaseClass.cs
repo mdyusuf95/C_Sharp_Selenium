@@ -48,7 +48,7 @@ namespace C_Sharp_Selenium.Main.Genric
             Console.WriteLine("Open browser ");
             _testcontext = context;
             String Url = context.Properties["Url"].ToString();
-            Console.WriteLine(Url);
+          
             driver =new ChromeDriver(/*options*/);
            
             driver.Navigate().GoToUrl(Url);
@@ -60,7 +60,7 @@ namespace C_Sharp_Selenium.Main.Genric
 
             extent = new ExtentReports();
             var htmlReporter = new ExtentHtmlReporter(@"C:\Users\yusuf\source\repos\C_Sharp_Selenium\C_Sharp_Selenium\Repo\MyTestReport.html");
-            test.Log(Status.Info, context.TestName.ToString());
+//            test.Log(Status.Info, context.TestName.ToString());
             extent.AttachReporter(htmlReporter);
             test = extent.CreateTest("Openbrowser");
 
