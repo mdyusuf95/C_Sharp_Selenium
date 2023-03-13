@@ -55,5 +55,18 @@ namespace C_Sharp_Selenium.Main.Genric
             string dataAndtime = dateTime.ToString();
             return dataAndtime;
         }
+
+        public string GetUniqueString(int lengthOfString)
+        {
+            string charectors = "abcdefghijklmnopqrstuvwxyz";
+            StringBuilder sb = new StringBuilder();
+            Random r = new Random();
+            for(int i = 0; i < lengthOfString; i++)
+            {
+                sb.Append(charectors[r.Next(charectors.Length)]);
+            }
+            
+            return sb.ToString();
+        }
     }
 }

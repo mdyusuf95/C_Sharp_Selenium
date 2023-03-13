@@ -108,12 +108,14 @@ namespace C_Sharp_Selenium.Main.ObjectRepositry
         public void SetProject(IWebDriver driver ,String ProjecctNmae,String  TeamSize,String ProjectMannager,String ProjecctStatus)
         {
             WebDriverUtilities w = new WebDriverUtilities();
-            projectNameBox.SendKeys(ProjecctNmae);
+            CShapUtilities cShapUtilities = new CShapUtilities();
+          int random=  cShapUtilities.RandomInteger(1000);
+            projectNameBox.SendKeys(ProjecctNmae+random);
             w.HandleDisableElement(driver, TeamSize, teamSizeBox);
             projectManagerBox.SendKeys(ProjectMannager);
-           // projectStatusDropDown.Click();
-           
-            w.SelectElements(projectStatusDropDown ,2);
+            // projectStatusDropDown.Click();
+            int random1= cShapUtilities.RandomInteger(3);
+            w.SelectElements(projectStatusDropDown ,random1);
             submitBtn.Click();
 
         }

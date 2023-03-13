@@ -488,13 +488,12 @@
     <Compile Include="Main\Genric\CustomEventFiringHandler.cs" />
     <Compile Include="Main\Genric\DataBaseUtilities.cs" />
     <Compile Include="Main\Genric\ExcelUtilities.cs" />
-    <Compile Include="Main\Genric\MyTestListener.cs" />
-    <Compile Include="Main\Genric\ObserverClass.cs" />
     <Compile Include="Main\Genric\WebDriverUtilities.cs" />
     <Compile Include="Main\ObjectRepositry\HomePage.cs" />
     <Compile Include="Main\ObjectRepositry\LogInPage.cs" />
     <Compile Include="Main\ObjectRepositry\ProjectsPage.cs" />
     <Compile Include="Tests\HomePageTest.cs" />
+    <Compile Include="Tests\pro.cs" />
     <Compile Include="Tests\ProjectsTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

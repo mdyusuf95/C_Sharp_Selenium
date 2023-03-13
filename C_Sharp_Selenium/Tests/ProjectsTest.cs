@@ -18,7 +18,7 @@ namespace C_Sharp_Selenium.Tests
 
 
     {
-    
+       
         public ProjectsPage projectsPage { get; set; }
          
         [DataTestMethod]
@@ -32,7 +32,9 @@ namespace C_Sharp_Selenium.Tests
             
             projectsPage.getProjectCreateBtn().Click();
             projectsPage.SetProject(driver,Projectname,teamsize,createdby,Status);
+            Thread.Sleep(500);
             projectsPage.getAlertCloseeBtnOnAdd().Click();
+     
             
         }
 
@@ -44,24 +46,32 @@ namespace C_Sharp_Selenium.Tests
             HomePage home = new HomePage(driver);
             home.getProjects().Click();
             projectsPage = new ProjectsPage(driver);
+            Wd_util.ScrollUptoBottom(driver);
+            Thread.Sleep(5000);
 
-         var  deleteIcons= projectsPage.getDeleteIcon();
-            int c = 0;
-            foreach (WebElement element in deleteIcons)
-            {
-                element.Click();
-                projectsPage.getDelelteBtn().Click();
-                
-                projectsPage.getAlertBtnOnDelete().Click();
-                projectsPage = new ProjectsPage(driver);
-            }
+
+            var deleteIcons = projectsPage.getDeleteIcon();
+                int c = 0;
+                foreach (var element in deleteIcons)
+                {
+                    element.Click();
+                    projectsPage.getDelelteBtn().Click();
+                    Thread.Sleep(500);
+
+                    projectsPage.getAlertBtnOnDelete().Click();
+                    projectsPage = new ProjectsPage(driver);
+                   // Wd_util.ScrollUptoBottom(driver);
+                }
+           
 
         }
+
+      
 
         public static IEnumerable<object[]> GetExcelData()
         {
             Spreadsheet spreadsheet = new Spreadsheet();
-            spreadsheet.LoadFromFile("C:\\Users\\yusuf\\source\\repos\\RestSharpAPI\\RestSharpAPI\\TestData\\data.xlsx");
+            spreadsheet.LoadFromFile("C:\\Users\\yusuf\\source\\repos\\C_Sharp_Selenium\\C_Sharp_Selenium\\TestData\\data1.xlsx");
             var ws = spreadsheet.Workbook.Worksheets["Sheet1"];
             int row = ws.UsedRangeRowMax;
             for (int i = 1; i <= row; i++)

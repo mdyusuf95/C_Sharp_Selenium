@@ -175,7 +175,14 @@ namespace C_Sharp_Selenium.Main.Genric
         public void JavaScripButtonClick(IWebDriver driver, IWebElement element)
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript("arguments[0].click()", element);
+            js.ExecuteScript("arguments[0].scrollIntoView();", element);
+
+        }
+
+        public void ScrollUptoBottom(IWebDriver driver)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("window.scrollBy(0,document.body.scrollHeight)");
 
         }
     }
