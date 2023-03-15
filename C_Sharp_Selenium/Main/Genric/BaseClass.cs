@@ -11,18 +11,20 @@ using C_Sharp_Selenium.Main.ObjectRepositry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.Events;
 using System;
 
 namespace C_Sharp_Selenium.Main.Genric
 {
     [TestClass]
-    public abstract  class BaseClass
+    public class BaseClass
     {
-        public static IWebDriver driver;
         public static TestContext _testcontext;
+       
         public static ExtentReports extent;
         public static ExtentTest test;
+        public static IWebDriver driver;
         public static EventFiringWebDriver eventFiringWebDriver;
 
 
@@ -36,14 +38,22 @@ namespace C_Sharp_Selenium.Main.Genric
      
         [AssemblyInitialize]
         
-        public static void ClassInitialize(TestContext context )
+        public static void ClassInitialize(TestContext context)
         {
-            
-            Console.WriteLine("Open browser ");
+             
+           
             _testcontext = context;
-            String Url = context.Properties["Url"].ToString();
-          
-            driver =new ChromeDriver();
+            string Url = context.Properties["Url"].ToString();
+
+           string Browser = context.Properties["Browser"].ToString();
+
+           if (Browser.Equals("Chrome"))
+            driver = new ChromeDriver(); 
+
+            else if (Browser.Equals("firefox"))
+            driver = new FirefoxDriver();
+
+            Console.WriteLine("Open browser ");
             eventFiringWebDriver = new CustomEventFiringHandler(driver);
             driver = eventFiringWebDriver;
 
@@ -72,10 +82,12 @@ namespace C_Sharp_Selenium.Main.Genric
             logInPage.SetLogIn(username,password);
             Console.WriteLine("login to app");
            
-           test.Log(Status.Info, _testcontext.TestName.ToString());
+         //  test.Log(Status.Info, _testcontext.TestName.ToString());
            
 
         }
+
+       
 
         [TestCleanup]
         public void logOut()
@@ -87,9 +99,10 @@ namespace C_Sharp_Selenium.Main.Genric
            test = extent.CreateTest(_testcontext.TestName.ToString());
             if (_testcontext.CurrentTestOutcome == UnitTestOutcome.Passed)
             {
+                
+              
                 test.Log(Status.Pass);
                 test.Log(Status.Info, _testcontext.CurrentTestOutcome.ToString());
-                
             }
             
 

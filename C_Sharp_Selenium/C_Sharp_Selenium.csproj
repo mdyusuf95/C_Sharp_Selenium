@@ -493,6 +493,7 @@
     <Compile Include="Main\ObjectRepositry\LogInPage.cs" />
     <Compile Include="Main\ObjectRepositry\ProjectsPage.cs" />
     <Compile Include="Tests\HomePageTest.cs" />
+    <Compile Include="Tests\LogInPageTest.cs" />
     <Compile Include="Tests\pro.cs" />
     <Compile Include="Tests\ProjectsTest.cs" />
     <Compile Include="UnitTest1.cs" />

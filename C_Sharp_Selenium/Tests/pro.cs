@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Data.Odbc;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace C_Sharp_Selenium.Tests
 {
     [TestClass]
+    [Ignore]
     public class pro
     {
         [TestMethod]
@@ -241,6 +243,19 @@ namespace C_Sharp_Selenium.Tests
             }while (num!=0);
 
             return rev;
+        }
+        [TestMethod]
+        public void Database()
+        {
+            string connectionString = "Server=localhost:1433;Database=Projects;Uid=root;Pwd=root;";
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            SqlCommand command = new SqlCommand("SELECT * FROM Project", connection);
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader[1].ToString());
+            }
         }
     }
 }

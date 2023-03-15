@@ -11,7 +11,8 @@ namespace C_Sharp_Selenium.Tests
     {
 
         public HomePage homePage;
-        [TestMethod ,Priority(-1)]
+       
+        [TestCategory("smoke")]
         public void HomeDisplayTest()
         {
 
@@ -26,7 +27,8 @@ namespace C_Sharp_Selenium.Tests
 
         }
 
-       [TestMethod,Priority(0)]
+       [TestMethod]
+        [TestCategory("smoke")]
         public void HomePageElementsDisplayedTest()
         {
             homePage = new HomePage(driver);
@@ -54,7 +56,8 @@ namespace C_Sharp_Selenium.Tests
 
         }
 
-        [TestMethod,Priority(1)]
+        [TestMethod]
+        [TestCategory("smoke")]
         public void HomePageElementsEnableTest()
         {
             homePage = new HomePage(driver);

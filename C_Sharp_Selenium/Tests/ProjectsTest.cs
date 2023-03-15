@@ -37,9 +37,8 @@ namespace C_Sharp_Selenium.Tests
      
             
         }
-
+      
         [TestMethod]
-        
         public void DeleteProjets()
         {
 
