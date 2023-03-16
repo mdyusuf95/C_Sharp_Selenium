@@ -70,6 +70,12 @@ namespace C_Sharp_Selenium.Main.ObjectRepositry
             return Logout;
         }
 
+        public void LogOut()
+        {
+            Logout.Click();
+            System.Console.WriteLine("--------LogOut-------");
+        }
+
 
     }
 }

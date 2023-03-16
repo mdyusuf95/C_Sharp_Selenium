@@ -66,7 +66,7 @@ namespace C_Sharp_Selenium.Main.Genric
         public static IEnumerable<object[]> GetExcelData()
         {
             Spreadsheet spreadsheet = new Spreadsheet();
-            spreadsheet.LoadFromFile("C:\\Users\\yusuf\\source\\repos\\C_Sharp_Selenium\\C_Sharp_Selenium\\TestData\\data1.xlsx");
+            spreadsheet.LoadFromFile(PathConstans.ExcelPath);
             var ws = spreadsheet.Workbook.Worksheets["Sheet1"];
             int row = ws.UsedRangeRowMax;
             for (int i = 1; i <= row; i++)

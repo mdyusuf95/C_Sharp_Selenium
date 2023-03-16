@@ -488,6 +488,7 @@
     <Compile Include="Main\Genric\CustomEventFiringHandler.cs" />
     <Compile Include="Main\Genric\DataBaseUtilities.cs" />
     <Compile Include="Main\Genric\ExcelUtilities.cs" />
+    <Compile Include="Main\Genric\PathConstans.cs" />
     <Compile Include="Main\Genric\WebDriverUtilities.cs" />
     <Compile Include="Main\ObjectRepositry\HomePage.cs" />
     <Compile Include="Main\ObjectRepositry\LogInPage.cs" />

@@ -25,15 +25,18 @@ namespace C_Sharp_Selenium.Main.Genric
         {
            string name= BaseClass._testcontext.TestName.ToString();
 
-            string filePath = $"C:\\Users\\yusuf\\source\\repos\\C_Sharp_Selenium\\C_Sharp_Selenium\\ScreenShots\\{DateTime.Now:yyyy-MM-dd_HH-mm-ss}" + name+ ".png";
+            string filePath = PathConstans.ScreenShotFile + name+ ".png";
             var SS = (ITakesScreenshot)e.Driver;
             SS.GetScreenshot().SaveAsFile(filePath);
             BaseClass. test = BaseClass.extent.CreateTest(BaseClass._testcontext.TestName);
            
-            BaseClass.test.AddScreenCaptureFromPath($"C:\\Users\\yusuf\\source\\repos\\C_Sharp_Selenium\\C_Sharp_Selenium\\ScreenShots\\{DateTime.Now:yyyy-MM-dd_HH-mm-ss}" + name + ".png");
+            BaseClass.test.AddScreenCaptureFromPath(PathConstans.ScreenShotFile + name + ".png");
             BaseClass. _testcontext.AddResultFile(filePath);
             Console.WriteLine("Screen shot captchred");
+           
             BaseClass.test.Log(Status.Fail);
         }
+
+       
     }
 }

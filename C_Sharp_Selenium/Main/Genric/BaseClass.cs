@@ -22,54 +22,34 @@ namespace C_Sharp_Selenium.Main.Genric
     {
         public static TestContext _testcontext;
        
+       
+        public static IWebDriver driver;
         public static ExtentReports extent;
         public static ExtentTest test;
-        public static IWebDriver driver;
-        public static EventFiringWebDriver eventFiringWebDriver;
 
-
-        public WebDriverUtilities Wd_util=new WebDriverUtilities();
-        public CShapUtilities cs_util = new CShapUtilities();
-        public DataBaseUtilities dB_util = new DataBaseUtilities();
-        public ExcelUtilities excel_util = new ExcelUtilities();
+        public static WebDriverUtilities Wd_util = new WebDriverUtilities();
+        public static CShapUtilities cs_util = new CShapUtilities();
+        public static DataBaseUtilities dB_util = new DataBaseUtilities();
+        public static ExcelUtilities excel_util = new ExcelUtilities();
 
     
-     
-     
         [AssemblyInitialize]
-        
         public static void ClassInitialize(TestContext context)
         {
              
-           
             _testcontext = context;
+            string Browser = context.Properties["Browser"].ToString();
             string Url = context.Properties["Url"].ToString();
 
-           string Browser = context.Properties["Browser"].ToString();
 
-           if (Browser.Equals("Chrome"))
-            driver = new ChromeDriver(); 
+           driver= Wd_util.OpenBrowserAndMaximizeAndImplicitWait(driver, Browser);
+           driver= Wd_util.GetEventfiringWebDriver(driver);
+           Wd_util.Get(driver, Url);
 
-            else if (Browser.Equals("firefox"))
-            driver = new FirefoxDriver();
-
-            Console.WriteLine("Open browser ");
-            eventFiringWebDriver = new CustomEventFiringHandler(driver);
-            driver = eventFiringWebDriver;
-
-            driver.Navigate().GoToUrl(Url);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
-            driver.Manage().Window.Maximize();
-           
-
-            extent = new ExtentReports();
-            var htmlReporter = new ExtentHtmlReporter(@"C:\Users\yusuf\source\repos\C_Sharp_Selenium\C_Sharp_Selenium\Repo\MyTestReport.html");        
-            extent.AttachReporter(htmlReporter);
+           extent= Wd_util.CreateExtentReportAndAttachToHtml(extent);
           
 
         }
-
-
 
         [TestInitialize]
          public  void logIn()
@@ -80,47 +60,22 @@ namespace C_Sharp_Selenium.Main.Genric
             
             LogInPage logInPage=new LogInPage(driver);
             logInPage.SetLogIn(username,password);
-            Console.WriteLine("login to app");
            
-         //  test.Log(Status.Info, _testcontext.TestName.ToString());
            
-
         }
-
-       
 
         [TestCleanup]
         public void logOut()
         {
-           
+            Wd_util.LogTest(extent, _testcontext);
             HomePage homePage =new HomePage(driver);
-            homePage.getLogOut().Click();
-            Console.WriteLine("logout");
-           test = extent.CreateTest(_testcontext.TestName.ToString());
-            if (_testcontext.CurrentTestOutcome == UnitTestOutcome.Passed)
-            {
-                
-              
-                test.Log(Status.Pass);
-                test.Log(Status.Info, _testcontext.CurrentTestOutcome.ToString());
-            }
-            
-
-
-
+            homePage.LogOut();
         }
 
         [AssemblyCleanup]
         public static void CloseBrowser()
         {
-           
-
-            driver.Quit();
-            extent.Flush();
-            Console.WriteLine("close the browser");
-
-
-
+            Wd_util.Quit(driver, extent);
         }
 
     }

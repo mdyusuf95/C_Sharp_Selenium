@@ -1,6 +1,7 @@
 ﻿
 
 
+using Bytescout.Spreadsheet.Charts;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
@@ -37,6 +38,7 @@ namespace C_Sharp_Selenium.Main.ObjectRepositry
             UsernameBox.SendKeys(username);
             PasswordBox.SendKeys(Password);
             SignInBtn.Click();
+            Console.WriteLine("--------LogIN--------");
 
         }
 

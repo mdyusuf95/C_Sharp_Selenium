@@ -1,12 +1,20 @@
-﻿using OpenQA.Selenium;
+﻿using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace C_Sharp_Selenium.Main.Genric
 {
@@ -184,6 +192,95 @@ namespace C_Sharp_Selenium.Main.Genric
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("window.scrollBy(0,document.body.scrollHeight)");
 
+        }
+        /// <summary>
+        /// this mehod is use open perticular browser and maximize it wait with implicitly wait
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="NameOFbrowser"></param>
+        /// <returns></returns>
+        public IWebDriver OpenBrowserAndMaximizeAndImplicitWait(IWebDriver driver,string NameOFbrowser)
+        {
+            if (NameOFbrowser.Equals("Chrome"))
+            {
+                driver = new ChromeDriver();
+            }
+
+            else if (NameOFbrowser.Equals("firefox"))
+            {
+                driver = new FirefoxDriver();
+            }
+
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+            Console.WriteLine("   [-OpenBrowser-]");
+            return driver;
+
+        }
+
+        /// <summary>
+        /// this method is use to get get event firing webdriver
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <returns></returns>
+        public IWebDriver GetEventfiringWebDriver(IWebDriver driver)
+        {
+            EventFiringWebDriver Driver= new CustomEventFiringHandler(driver);
+            driver = Driver;
+            return driver;
+
+        }
+        /// <summary>
+        /// thois method is use navigate perticular website
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="Url"></param>
+        public void Get(IWebDriver driver,string Url)
+        {
+            driver.Navigate().GoToUrl(Url);
+        }
+        /// <summary>
+        /// this method is use to create extentsreports and attach with html
+        /// </summary>
+        /// <param name="extent"></param>
+        /// <returns></returns>
+        public ExtentReports  CreateExtentReportAndAttachToHtml(ExtentReports extent )
+        {
+            extent = new ExtentReports();
+            var htmlReporter = new ExtentHtmlReporter(PathConstans.ExtentReportfile);
+            extent.AttachReporter(htmlReporter);
+            return extent;
+
+        }
+        /// <summary>
+        /// this methos is use to log test resultes into reports
+        /// </summary>
+        /// <param name="extent"></param>
+        /// <param name="_testcontext"></param>
+        /// <returns></returns>
+        public ExtentTest LogTest(ExtentReports extent,TestContext _testcontext)
+        {
+            ExtentTest test = extent.CreateTest(_testcontext.TestName.ToString());
+            if (_testcontext.CurrentTestOutcome == UnitTestOutcome.Passed)
+            {
+                
+              
+                test.Log(Status.Pass);
+                test.Log(Status.Info, _testcontext.CurrentTestOutcome.ToString());
+            }
+            return test;
+        }
+        /// <summary>
+        /// this Method is use to dispose to driver
+        /// </summary>
+        /// <param name="driver"></param>
+        /// <param name="extent"></param>
+        public void Quit(IWebDriver driver ,ExtentReports extent)
+        {
+            driver.Quit();
+            driver.Dispose();
+            extent.Flush();
+            Console.WriteLine("   [-CloseBrowser-]");
         }
     }
 }
