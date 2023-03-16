@@ -1,8 +1,4 @@
-﻿
-
-
-using Bytescout.Spreadsheet.Charts;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
 

@@ -1,5 +1,4 @@
-﻿
-using C_Sharp_Selenium.Main.Genric;
+﻿using C_Sharp_Selenium.Main.Genric;
 using C_Sharp_Selenium.Main.ObjectRepositry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;

@@ -1,16 +1,9 @@
-﻿using AventStack.ExtentReports.Model;
+﻿
 using AventStack.ExtentReports;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.Events;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace C_Sharp_Selenium.Main.Genric
 {

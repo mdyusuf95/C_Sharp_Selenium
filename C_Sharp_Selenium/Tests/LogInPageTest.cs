@@ -1,13 +1,7 @@
 ﻿using C_Sharp_Selenium.Main.Genric;
 using C_Sharp_Selenium.Main.ObjectRepositry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace C_Sharp_Selenium.Tests
 {

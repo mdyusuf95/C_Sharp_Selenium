@@ -2,17 +2,10 @@
 
 //[assembly:Parallelize(Workers =1,Scope =ExecutionScope.ClassLevel)]
 
-
-
-
 using AventStack.ExtentReports;
-using AventStack.ExtentReports.Reporter;
 using C_Sharp_Selenium.Main.ObjectRepositry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.Events;
 using System;
 
 namespace C_Sharp_Selenium.Main.Genric
@@ -60,7 +53,6 @@ namespace C_Sharp_Selenium.Main.Genric
             
             LogInPage logInPage=new LogInPage(driver);
             logInPage.SetLogIn(username,password);
-           
            
         }
 
