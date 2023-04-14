@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using C_Sharp_Selenium.Main.Genric;
+using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
 namespace C_Sharp_Selenium.Main.ObjectRepositry
@@ -28,9 +29,9 @@ namespace C_Sharp_Selenium.Main.ObjectRepositry
         private IWebElement Logout { get; set; }
 
 
-        public HomePage(IWebDriver driver)
+        public HomePage()
         {
-            PageFactory.InitElements(driver, this);
+            PageFactory.InitElements(Utility.GetDriver(), this);
         }
 
 

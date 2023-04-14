@@ -8,12 +8,15 @@ using OpenQA.Selenium.Support.Events;
 using OpenQA.Selenium.Support.UI;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SeleniumExtras.WaitHelpers;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
 
 namespace C_Sharp_Selenium.Main.Genric
 {
     public  class WebDriverUtilities
     {
-
+        public IWebDriver driver;
         /// <summary>
         /// this is usefull to go to page perticular page
         /// </summary>
@@ -54,9 +57,9 @@ namespace C_Sharp_Selenium.Main.Genric
         /// </summary>
         /// <param name="driver"></param>
 
-        public static void AlertDissmiss(IWebDriver driver)
+        public static void AlertDissmiss()
         {
-            driver.SwitchTo().Alert().Dismiss();
+            Utility.GetDriver().SwitchTo().Alert().Dismiss();
 
         }
 
@@ -160,9 +163,9 @@ namespace C_Sharp_Selenium.Main.Genric
         /// <param name="driver"></param>
         /// <param name="value"></param>
         /// <param name="element"></param>
-        public void HandleDisableElement(IWebDriver driver, String value, IWebElement element)
+        public void HandleDisableElement( String value, IWebElement element)
         {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Utility.GetDriver();
            // js.ExecuteScript("arguments[0].value='" + value + "'", element);
             js.ExecuteScript("document.getElementsByName('projectName').value=" + value + "");
 
@@ -180,9 +183,9 @@ namespace C_Sharp_Selenium.Main.Genric
 
         }
 
-        public void ScrollUptoBottom(IWebDriver driver)
+        public void ScrollUptoBottom()
         {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Utility.GetDriver();
             js.ExecuteScript("window.scrollBy(0,document.body.scrollHeight)");
 
         }
@@ -192,22 +195,27 @@ namespace C_Sharp_Selenium.Main.Genric
         /// <param name="driver"></param>
         /// <param name="NameOFbrowser"></param>
         /// <returns></returns>
-        public IWebDriver OpenBrowserAndMaximizeAndImplicitWait(IWebDriver driver,string NameOFbrowser)
+        public void OpenBrowserAndMaximizeAndImplicitWait(string NameOFbrowser)
         {
             if (NameOFbrowser.Equals("Chrome"))
             {
+                new DriverManager().SetUpDriver(new ChromeConfig());
+
                 driver = new ChromeDriver();
             }
+            
 
             else if (NameOFbrowser.Equals("firefox"))
             {
+                new DriverManager().SetUpDriver(new FirefoxConfig());
                 driver = new FirefoxDriver();
             }
-
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
+            driver= Utility.GetWebDriverUtilities().GetEventfiringWebDriver(driver);
+            Utility.SetDriver(driver);
+            Utility.GetDriver().Manage().Window.Maximize();
+            Utility.GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
             Console.WriteLine("   [-OpenBrowser-]");
-            return driver;
+           
 
         }
 
@@ -228,9 +236,9 @@ namespace C_Sharp_Selenium.Main.Genric
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="Url"></param>
-        public void Get(IWebDriver driver,string Url)
+        public void Get(string Url)
         {
-            driver.Navigate().GoToUrl(Url);
+            Utility.GetDriver().Navigate().GoToUrl(Url);
         }
         /// <summary>
         /// this method is use to create extentsreports and attach with html
@@ -268,12 +276,20 @@ namespace C_Sharp_Selenium.Main.Genric
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="extent"></param>
-        public void Quit(IWebDriver driver ,ExtentReports extent)
+        public void Quit(ExtentReports extent)
         {
-            driver.Quit();
-            driver.Dispose();
+            Utility.GetDriver().Quit();
+            Utility.GetDriver().Dispose();
             extent.Flush();
             Console.WriteLine("   [-CloseBrowser-]");
+        }
+
+        public void WaitUntilElementVisible(String Xpath)
+        {
+            WebDriverWait driverWait=new WebDriverWait(Utility.GetDriver(),TimeSpan.FromSeconds(20));
+            driverWait.Until(ExpectedConditions.ElementIsVisible(By.XPath(Xpath)));
+
+
         }
     }
 }

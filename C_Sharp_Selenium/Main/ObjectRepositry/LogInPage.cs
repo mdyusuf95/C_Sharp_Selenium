@@ -1,10 +1,11 @@
-﻿using OpenQA.Selenium;
+﻿using C_Sharp_Selenium.Main.Genric;
+using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
 
 namespace C_Sharp_Selenium.Main.ObjectRepositry
 {
-     class LogInPage
+     public class LogInPage
     {
 
         [FindsBy(How =How.Id,Using =("usernmae"))]
@@ -23,9 +24,9 @@ namespace C_Sharp_Selenium.Main.ObjectRepositry
         private IWebElement SignCardBody { get; set; }
 
 
-        public LogInPage(IWebDriver driver )
+        public LogInPage( )
         {
-            PageFactory.InitElements(driver, this);
+            PageFactory.InitElements(Utility.GetDriver(), this);
         }
 
 

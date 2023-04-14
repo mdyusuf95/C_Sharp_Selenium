@@ -44,9 +44,9 @@ namespace C_Sharp_Selenium.Main.ObjectRepositry
 
 
 
-        public ProjectsPage(IWebDriver driver)
+        public ProjectsPage()
         {
-            PageFactory.InitElements(driver, this);
+            PageFactory.InitElements(Utility.GetDriver(), this);
         }
 
         public IWebElement getProjectCreateBtn()
@@ -101,18 +101,21 @@ namespace C_Sharp_Selenium.Main.ObjectRepositry
 
 
 
-        public void SetProject(IWebDriver driver ,String ProjecctNmae,String  TeamSize,String ProjectMannager,String ProjecctStatus)
+        public void SetProject(String ProjecctNmae,String  TeamSize,String ProjectMannager,String ProjecctStatus)
         {
-            WebDriverUtilities w = new WebDriverUtilities();
-            CShapUtilities cShapUtilities = new CShapUtilities();
-          int random=  cShapUtilities.RandomInteger(1000);
+            
+           
+          int random=  Utility.GetCShapUtilities().RandomInteger(1000);
             projectNameBox.SendKeys(ProjecctNmae+random);
-            w.HandleDisableElement(driver, TeamSize, teamSizeBox);
+            Utility.GetWebDriverUtilities().HandleDisableElement( TeamSize, teamSizeBox);
             projectManagerBox.SendKeys(ProjectMannager);
-            // projectStatusDropDown.Click();
-            int random1= cShapUtilities.RandomInteger(3);
-            w.SelectElements(projectStatusDropDown ,random1);
+   
+            int random1= Utility.GetCShapUtilities().RandomInteger(3);
+            Utility.GetWebDriverUtilities().SelectElements(projectStatusDropDown ,random1);
             submitBtn.Click();
+           
+            Utility.GetWebDriverUtilities().WaitUntilElementVisible( "//button[@class='Toastify__close-button Toastify__close-button--success']");
+            alertCloseBtnOnAdd.Click();
 
         }
 

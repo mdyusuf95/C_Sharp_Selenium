@@ -9,18 +9,18 @@ namespace C_Sharp_Selenium.Tests
     public  class HomePageTest:BaseClass
     {
 
-        public HomePage homePage;
+       
        
         [TestCategory("smoke")]
         public void HomeDisplayTest()
         {
 
            //home should displayed 
-            homePage=new HomePage(driver);
+            
 
             //home page titel should ="React App"
             String Expectedtiltel = "React App";
-            String Actualtiltle=driver.Title;
+            String Actualtiltle=Utility.GetDriver() .Title;
             Assert.AreEqual(Expectedtiltel,Actualtiltle);
            
 
@@ -30,7 +30,7 @@ namespace C_Sharp_Selenium.Tests
         [TestCategory("smoke")]
         public void HomePageElementsDisplayedTest()
         {
-            homePage = new HomePage(driver);
+          //  homePage = new HomePage(driver);
 
             // testyantra should display
             Assert.IsTrue(homePage.getTestYantra().Displayed);
@@ -59,7 +59,7 @@ namespace C_Sharp_Selenium.Tests
         [TestCategory("smoke")]
         public void HomePageElementsEnableTest()
         {
-            homePage = new HomePage(driver);
+          //  homePage = new HomePage(driver);
 
             // testyantra should display
             Assert.IsTrue(homePage.getTestYantra().Enabled);

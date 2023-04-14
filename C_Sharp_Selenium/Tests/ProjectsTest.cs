@@ -16,49 +16,47 @@ namespace C_Sharp_Selenium.Tests
 
     {
        
-        public ProjectsPage projectsPage { get; set; }
+        
          
         [DataTestMethod]
         [DynamicData(nameof(ExcelUtilities.GetExcelData),DynamicDataSourceType.Method)]
         public void Createprojet(String createdby,String Projectname,String Status,string teamsize )
         {
-           
-            HomePage home=new HomePage(driver);
-            home.getProjects().Click();
-            projectsPage = new ProjectsPage(driver);
-            
+
+
+            homePage.getProjects().Click();
             projectsPage.getProjectCreateBtn().Click();
-            projectsPage.SetProject(driver,Projectname,teamsize,createdby,Status);
-            Thread.Sleep(500);
-            projectsPage.getAlertCloseeBtnOnAdd().Click();
-     
+            projectsPage.SetProject(Projectname,teamsize,createdby,Status);
             
         }
 
         [TestMethod]
-        [Ignore]
+       
         public void DeleteProjets()
         {
 
-            HomePage home = new HomePage(driver);
-            home.getProjects().Click();
-            projectsPage = new ProjectsPage(driver);
-            Wd_util.ScrollUptoBottom(driver);
-            Thread.Sleep(5000);
-
+           // HomePage home = new HomePage();
+            homePage.getProjects().Click();
+            Utility.GetWebDriverUtilities().ScrollUptoBottom();
 
             var deleteIcons = projectsPage.getDeleteIcon();
-                int c = 0;
+            DeleteProjets:
+            try
+            {
                 foreach (var element in deleteIcons)
                 {
                     element.Click();
                     projectsPage.getDelelteBtn().Click();
                     Thread.Sleep(500);
-
                     projectsPage.getAlertBtnOnDelete().Click();
-                    projectsPage = new ProjectsPage(driver);
-                   // Wd_util.ScrollUptoBottom(driver);
+                    
+
                 }
+            }
+            catch(Exception e)
+            {
+                goto DeleteProjets;
+            }
            
 
         }
@@ -71,15 +69,18 @@ namespace C_Sharp_Selenium.Tests
             spreadsheet.LoadFromFile(PathConstans.ExcelPath);
             var ws = spreadsheet.Workbook.Worksheets["Sheet1"];
             int row = ws.UsedRangeRowMax;
-            for (int i = 1; i <= row; i++)
-            {
-                string CreatedBy = ws.Cell(i, 0).ToString();
-                string Project = ws.Cell(i, 1).ToString();
-                string Status = ws.Cell(i, 2).ToString();
-                string teamSize = ws.Cell(i, 3).ToString();
+          
+                for (int i = 1; i <= row; i++)
+                {
+                    string CreatedBy = ws.Cell(i, 0).ToString();
+                    string Project = ws.Cell(i, 1).ToString();
+                    string Status = ws.Cell(i, 2).ToString();
+                    string teamSize = ws.Cell(i, 3).ToString();
 
-                yield return new object[] { CreatedBy, Project, Status, teamSize };
-            }
+                    yield return new object[] { CreatedBy, Project, Status, teamSize };
+                }
+            
+            
 
         }
     }
