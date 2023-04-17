@@ -7,6 +7,7 @@ using C_Sharp_Selenium.Main.ObjectRepositry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using System;
+using System.Reflection;
 
 namespace C_Sharp_Selenium.Main.Genric
 {
@@ -50,8 +51,8 @@ namespace C_Sharp_Selenium.Main.Genric
            Wd_util.Get( Url);
 
            extent= Wd_util.CreateExtentReportAndAttachToHtml(extent);
-
            
+
 
 
 
@@ -68,22 +69,27 @@ namespace C_Sharp_Selenium.Main.Genric
             homePage = new HomePage();
             projectsPage = new ProjectsPage();
 
+
             logInPage.SetLogIn(username,password);
            
+
         }
 
         [TestCleanup]
         public void logOut()
         {
-            Utility.GetWebDriverUtilities().LogTest(extent, _testcontext);
+           
            
             homePage.LogOut();
+           
         }
 
         [AssemblyCleanup]
         public static void CloseBrowser()
         {
+            Utility.GetWebDriverUtilities().LogTest(extent, _testcontext, MethodBase.GetCurrentMethod().Name);
             Utility.GetWebDriverUtilities().Quit(extent);
+            
         }
 
     }

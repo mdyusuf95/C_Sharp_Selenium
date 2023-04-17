@@ -4,8 +4,11 @@ using C_Sharp_Selenium.Main.ObjectRepositry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Threading;
-
+using Xunit.Sdk;
 
 namespace C_Sharp_Selenium.Tests
 {
@@ -15,30 +18,35 @@ namespace C_Sharp_Selenium.Tests
 
 
     {
-       
-        
-         
+
+
+
         [DataTestMethod]
+        
         [DynamicData(nameof(ExcelUtilities.GetExcelData),DynamicDataSourceType.Method)]
         public void Createprojet(String createdby,String Projectname,String Status,string teamsize )
         {
 
-
+            //click on Projects
             homePage.getProjects().Click();
+            //click on Add Project button
             projectsPage.getProjectCreateBtn().Click();
+            //Create Project
             projectsPage.SetProject(Projectname,teamsize,createdby,Status);
-            
+            //test log
+
+            Utility.GetWebDriverUtilities().LogTest(extent, _testcontext, MethodBase.GetCurrentMethod().Name);
         }
 
         [TestMethod]
+        
        
         public void DeleteProjets()
         {
 
-           // HomePage home = new HomePage();
+           
             homePage.getProjects().Click();
             Utility.GetWebDriverUtilities().ScrollUptoBottom();
-
             var deleteIcons = projectsPage.getDeleteIcon();
             DeleteProjets:
             try
@@ -57,7 +65,8 @@ namespace C_Sharp_Selenium.Tests
             {
                 goto DeleteProjets;
             }
-           
+            //test log
+            Utility.GetWebDriverUtilities().LogTest(extent, _testcontext, MethodBase.GetCurrentMethod().Name);
 
         }
 

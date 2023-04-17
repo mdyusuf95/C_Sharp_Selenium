@@ -27,7 +27,7 @@ namespace C_Sharp_Selenium.Main.Genric
             BaseClass. _testcontext.AddResultFile(filePath);
             Console.WriteLine("Screen shot captchred");
            
-            BaseClass.test.Log(Status.Fail);
+            BaseClass.test.Log(Status.Fail,e.ToString());
         }
 
        

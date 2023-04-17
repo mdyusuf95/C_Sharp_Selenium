@@ -1,7 +1,7 @@
 ﻿using C_Sharp_Selenium.Main.Genric;
-using C_Sharp_Selenium.Main.ObjectRepositry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Reflection;
 
 namespace C_Sharp_Selenium.Tests
 {
@@ -15,22 +15,24 @@ namespace C_Sharp_Selenium.Tests
         public void HomeDisplayTest()
         {
 
-           //home should displayed 
+           
             
 
             //home page titel should ="React App"
             String Expectedtiltel = "React App";
             String Actualtiltle=Utility.GetDriver() .Title;
-            Assert.AreEqual(Expectedtiltel,Actualtiltle);
+            Assert.IsTrue(Expectedtiltel.Equals(Actualtiltle));
            
 
+            //test log
+            Utility.GetWebDriverUtilities().LogTest(extent, _testcontext, MethodBase.GetCurrentMethod().Name);
         }
 
        [TestMethod]
         [TestCategory("smoke")]
         public void HomePageElementsDisplayedTest()
         {
-          //  homePage = new HomePage(driver);
+          
 
             // testyantra should display
             Assert.IsTrue(homePage.getTestYantra().Displayed);
@@ -53,6 +55,8 @@ namespace C_Sharp_Selenium.Tests
             //logOut should display
             Assert.IsTrue(homePage.getLogOut().Displayed);
 
+            //test log
+            Utility.GetWebDriverUtilities().LogTest(extent, _testcontext, MethodBase.GetCurrentMethod().Name);
         }
 
         [TestMethod]
@@ -82,6 +86,8 @@ namespace C_Sharp_Selenium.Tests
             //logOut should display
             Assert.IsTrue(homePage.getLogOut().Enabled);
 
+            //test log
+            Utility.GetWebDriverUtilities().LogTest(extent, _testcontext, MethodBase.GetCurrentMethod().Name);
         }
 
 

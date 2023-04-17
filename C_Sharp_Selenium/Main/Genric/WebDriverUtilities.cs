@@ -12,6 +12,7 @@ using SeleniumExtras.WaitHelpers;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
+
 namespace C_Sharp_Selenium.Main.Genric
 {
     public  class WebDriverUtilities
@@ -138,9 +139,9 @@ namespace C_Sharp_Selenium.Main.Genric
         /// </summary>
         /// <param name="element"></param>
         /// <param name="driver"></param>
-        public void MouseAction( IWebElement element, IWebDriver driver)
+        public void MouseAction( IWebElement element)
         {
-            Actions a = new Actions(driver);
+            Actions a = new Actions(Utility.GetDriver());
             a.ContextClick(element);
 
         }
@@ -151,9 +152,9 @@ namespace C_Sharp_Selenium.Main.Genric
         /// <param name="driver"></param>
         /// <param name="window"></param>
 
-        public void MouseAction(IWebDriver driver, String window)
+        public void MouseAction(String window)
         {
-            driver.SwitchTo().Window(window);
+            Utility.GetDriver().SwitchTo().Window(window);
 
         }
 
@@ -176,9 +177,9 @@ namespace C_Sharp_Selenium.Main.Genric
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="element"></param>
-        public void JavaScripButtonClick(IWebDriver driver, IWebElement element)
+        public void JavaScripButtonClick(IWebElement element)
         {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Utility.GetDriver();
             js.ExecuteScript("arguments[0].scrollIntoView();", element);
 
         }
@@ -210,7 +211,8 @@ namespace C_Sharp_Selenium.Main.Genric
                 new DriverManager().SetUpDriver(new FirefoxConfig());
                 driver = new FirefoxDriver();
             }
-            driver= Utility.GetWebDriverUtilities().GetEventfiringWebDriver(driver);
+            Utility.SetDriver(driver);
+            driver = Utility.GetWebDriverUtilities().GetEventfiringWebDriver();
             Utility.SetDriver(driver);
             Utility.GetDriver().Manage().Window.Maximize();
             Utility.GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(15);
@@ -224,9 +226,9 @@ namespace C_Sharp_Selenium.Main.Genric
         /// </summary>
         /// <param name="driver"></param>
         /// <returns></returns>
-        public IWebDriver GetEventfiringWebDriver(IWebDriver driver)
+        public IWebDriver GetEventfiringWebDriver()
         {
-            EventFiringWebDriver Driver= new CustomEventFiringHandler(driver);
+            EventFiringWebDriver Driver= new CustomEventFiringHandler(Utility.GetDriver());
             driver = Driver;
             return driver;
 
@@ -259,16 +261,17 @@ namespace C_Sharp_Selenium.Main.Genric
         /// <param name="extent"></param>
         /// <param name="_testcontext"></param>
         /// <returns></returns>
-        public ExtentTest LogTest(ExtentReports extent,TestContext _testcontext)
+        public ExtentTest LogTest(ExtentReports extent,TestContext _testcontext,string methodName)
         {
-            ExtentTest test = extent.CreateTest(_testcontext.TestName.ToString());
+            ExtentTest test = extent.CreateTest(methodName);
             if (_testcontext.CurrentTestOutcome == UnitTestOutcome.Passed)
             {
-                
-              
-                test.Log(Status.Pass);
-                test.Log(Status.Info, _testcontext.CurrentTestOutcome.ToString());
+
+
+               
+                test.Log(Status.Pass, methodName);
             }
+           
             return test;
         }
         /// <summary>
