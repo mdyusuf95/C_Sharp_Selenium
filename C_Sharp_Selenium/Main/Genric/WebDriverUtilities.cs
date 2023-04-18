@@ -23,9 +23,9 @@ namespace C_Sharp_Selenium.Main.Genric
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="Url"></param>
-        public void GoToUrl(IWebDriver driver, String Url)
+        public void GoToUrl( String Url)
         {
-            driver.Navigate().GoToUrl(Url);
+            Utility.GetDriver().Navigate().GoToUrl(Url);
 
         }
 
@@ -34,9 +34,9 @@ namespace C_Sharp_Selenium.Main.Genric
         /// </summary>
         /// <param name="driver"></param>
         /// <param name="timeinseconds"></param>
-        public void implicityWaites(IWebDriver driver, int timeinseconds)
+        public void implicityWaites(int timeinseconds)
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeinseconds);
+            Utility.GetDriver().Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(timeinseconds);
 
         }
 
