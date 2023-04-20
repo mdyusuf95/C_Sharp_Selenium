@@ -6,7 +6,9 @@ using AventStack.ExtentReports;
 using C_Sharp_Selenium.Main.ObjectRepositry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
+using System.IO;
 using System.Reflection;
 
 namespace C_Sharp_Selenium.Main.Genric
@@ -71,6 +73,7 @@ namespace C_Sharp_Selenium.Main.Genric
 
 
             logInPage.SetLogIn(username,password);
+            
            
 
         }
@@ -81,6 +84,8 @@ namespace C_Sharp_Selenium.Main.Genric
            
            
             homePage.LogOut();
+            
+            
            
         }
 

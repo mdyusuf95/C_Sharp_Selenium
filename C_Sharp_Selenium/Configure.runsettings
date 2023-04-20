@@ -4,7 +4,7 @@
 	
 	<TestRunParameters>
 		<Parameter name="Url" value="http://rmgyantra:rmgy@9999@localhost:8084/" />
-		<Parameter name="Browser" value="Chrome" />
+		<Parameter name="Browser" value="chrome" />
 
 		<Parameter name="username" value="rmgyantra" />
 		<Parameter name="password" value="rmgy@9999" />
