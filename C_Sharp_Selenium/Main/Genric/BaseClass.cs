@@ -6,9 +6,7 @@ using AventStack.ExtentReports;
 using C_Sharp_Selenium.Main.ObjectRepositry;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using System;
-using System.IO;
 using System.Reflection;
 
 namespace C_Sharp_Selenium.Main.Genric
@@ -38,6 +36,8 @@ namespace C_Sharp_Selenium.Main.Genric
             _testcontext = context;
             string Browser = context.Properties["Browser"].ToString();
             string Url = context.Properties["Url"].ToString();
+
+           
 
             Utility.SetWebDriverUtilities(new WebDriverUtilities());
             Utility.SetExcelUtilities(new ExcelUtilities());
@@ -97,5 +97,9 @@ namespace C_Sharp_Selenium.Main.Genric
             
         }
 
+    }
+
+    internal class DesiredCapabilities
+    {
     }
 }

@@ -266,6 +266,12 @@
     <Reference Include="RazorEngine.NetCore, Version=0.0.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.NetCore.2.2.6\lib\net461\RazorEngine.NetCore.dll</HintPath>
     </Reference>
+    <Reference Include="RemoteWebDriverUtilities, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RemoteWebDriverOptions.1.1.0\lib\netstandard2.0\RemoteWebDriverUtilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Selenium.WebDriverBackedSelenium, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriverBackedSelenium.4.1.0\lib\net47\Selenium.WebDriverBackedSelenium.dll</HintPath>
+    </Reference>
     <Reference Include="SeleniumExtras.PageObjects, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetSeleniumExtras.PageObjects.Core.4.3.0\lib\net462\SeleniumExtras.PageObjects.dll</HintPath>
     </Reference>
