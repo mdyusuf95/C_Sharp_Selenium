@@ -197,7 +197,7 @@ namespace C_Sharp_Selenium.Main.Genric
         /// <returns></returns>
         public void OpenBrowserAndMaximizeAndImplicitWait(string NameOFbrowser)
         {
-            if (NameOFbrowser.Equals("Chrome"))
+            if (NameOFbrowser.Equals("chrome"))
             {
                 new DriverManager().SetUpDriver(new ChromeConfig());
 
